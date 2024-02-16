@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,10 +33,16 @@ require __DIR__.'/auth.php';
 
 
 #Gates in Routes
-Route::get('/user/delete',[TestController::class,'delete'])->middleware('can:is_admin');
-Route::get('/user/show',[TestController::class,'show'])->middleware('can:is_user');
+// Route::get('/user/delete',[TestController::class,'delete'])->middleware('can:is_admin');
+// Route::get('/user/show',[TestController::class,'show'])->middleware('can:is_user');
 
 
-// #Gates in Controller
-// Route::get('/user/delete',[TestController::class,'delete']);
-// Route::get('/user/show',[TestController::class,'show']);
+#Gates in Controller
+Route::get('/user/delete',[TestController::class,'delete']);
+Route::get('/user/show',[TestController::class,'show']);
+
+
+# Policies route
+Route::get('/posts/edit/{post}',[TestController::class,'edit']);
+// Route::get('/posts/edit/{post}',[TestController::class,'edit'])->can('update','post');
+// Route::get('/posts/edit/{post}',[TestController::class,'edit'])->middleware('can:update,post');

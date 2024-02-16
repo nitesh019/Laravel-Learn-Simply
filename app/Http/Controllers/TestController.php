@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Gate;
 
 class TestController extends Controller
 {
@@ -20,7 +22,6 @@ class TestController extends Controller
     public function index(){
             return view('test.search');
     }
-
 
     public function result(Request $request){
         # give us an error
@@ -41,15 +42,27 @@ class TestController extends Controller
         return back()->withError($message);
     }  
 
-
-    public function delete(){   
-        dd('inside delete method');
-    }
-  
     public function show(){
-        
+        if(!Gate::denies('is_user')){
+            abort(403);
+        }  
+
         dd('inside show method');
     }
+
+    public function delete(){  
+        if(!Gate::allows('is_admin')){
+            abort(403);
+        }  
+  
+        dd('inside delete method');
+    }
+
+    public function edit(Post $post){
+          $this->authorize('update',$post);
+          return 'You can edit this post';
+    }
+
   
 
 }
