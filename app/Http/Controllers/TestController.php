@@ -39,8 +39,17 @@ class TestController extends Controller
             }
         }
         return back()->withError($message);
+    }  
 
 
+    public function delete(){   
+        dd('inside delete method');
     }
+  
+    public function show(){
+        
+        dd('inside show method');
+    }
+  
 
 }
