@@ -1,6 +1,4 @@
 <?php
-<?php
-<?php
 
 use App\Jobs\MyQueueMailJob;
 use App\Jobs\EncodeVideoClip;
@@ -110,46 +108,6 @@ Route::get('/test',[TestController::class,'showTestInfo']);
 Route::get('/test/{testName}',[TestController::class,'PrintTest']);
 
 Route::resource('/photo',PhotoController::class);
-
-Route::get('/login/{username}/{password}',[BladeController::class,'showLoginIngo']);
-Route::get('/user/{role}',[BladeController::class,'showUserRole']);
-Route::get('/user/score/{score}',[BladeController::class, 'showGrade']);
-Route::get('/employee', [BladeController::class, 'showEmployeeList']);
-
-Route::view('/dashboard','layout.master');
-Route::get('/home',[BladeController::class,'showHomePage']);
-// Route::get('/contact',[BladeController::class,'showContactPage']);
-
-# Advance Routing
-  # Named Route
-  Route::get('/home/myhome/firstpage/application/dashboard/w/e/r/t/t/w/r',[BladeController::class,'showHomePage'])->name('home');
-  Route::get('/contact',[BladeController::class,'showContactPage']);
-
- # Route Group with Middleware
- Route::middleware(AgeMiddleware::class)->group(function(){
-    Route::get('/api/route1',[BladeController::class, 'showEmployeeList']);
-    Route::get('/api/route2',[BladeController::class, 'showEmployeeList']);
-    Route::get('/api/route3',[BladeController::class, 'showEmployeeList']);
-    Route::get('/api/route4',[BladeController::class, 'showEmployeeList']);
- });
- # Route Group with Controller
- Route::controller(BladeController::class)->middleware(AgeMiddleware::class)->group(function(){
-    Route::get('/api/route1','showEmployeeList');
-    Route::get('/api/route2','showEmployeeList');
-    Route::get('/api/route3','showEmployeeList');
-    Route::get('/api/route4','showEmployeeList');
- });
-
- # Route Group with prefix
- Route::prefix('/api')->controller(BladeController::class)->middleware(AgeMiddleware::class)->group(function(){
-    Route::get('/route1','showEmployeeList');
-    Route::get('/route2','showEmployeeList');
-    Route::get('/route3','showEmployeeList');
-    Route::get('/route4','showEmployeeList');
- });
-
- # URL GENERATION
- Route::view('/login/user', 'login');
 
 //  Route::view('/form','Form.form');
 //  Route::post('/create', [FormController::class, 'formSubmit'])->name('formSubmit');

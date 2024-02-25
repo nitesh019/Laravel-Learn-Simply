@@ -63,6 +63,29 @@ class TestController extends Controller
           return 'You can edit this post';
     }
 
-  
+    public function debug(){
+
+    //  $data =  User::all();
+        // $data =  User::all()->toArray();
+        // $data = User::toSql();
+        // $data = User::Where('name','peter')->toSql();
+        // $data = User::Where('name','peter')->get();
+        // $data = User::Where('name','peter')->dd();
+        // $data = User::Where('name','peter')->orWhere('email','peter@gmail.com')->dd();
+        //  dd($data);
+
+
+        // ------Another way-----------
+        // DB::enableQueryLog();
+        // $data = User::Where('name','peter')->orWhere('email','peter@gmail.com')->get();
+        // dd(DB::getQueryLog());
+
+
+        // ------Using Debugger library----------
+        $data = User::all();
+        return view('test',['data'=>$data]);
+    }
+
+
 
 }
